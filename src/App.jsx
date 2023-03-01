@@ -7,18 +7,26 @@ const Button = (props) => (
   </button>
 )
 
-const Statistics = (props) => (
-  <div>
-    <br></br>
-    <h2>Statistics</h2>
-    <p>good {props.good}</p>
-    <p>neutral {props.neutral}</p>
-    <p>bad {props.bad}</p>
-    <p>all {props.all}</p>
-    <p>average {props.average}</p>
-    <p>positive {(props.good*100)/(props.all)} %</p>
-  </div>
-)
+function Statistics  (props)  {
+  return props.all ? (
+    <div>
+      <br></br>
+      <h2>Statistics</h2>
+      <p>good {props.good}</p>
+      <p>neutral {props.neutral}</p>
+      <p>bad {props.bad}</p>
+      <p>all {props.all}</p>
+      <p>average {props.average}</p>
+      <p>positive {(props.good*100)/(props.all)} %</p>
+    </div>
+  ) : (
+    <p> No feedback given </p>
+  )
+
+}
+  
+  
+
 
 function App() {
   const [good, setGood] = useState(0)
