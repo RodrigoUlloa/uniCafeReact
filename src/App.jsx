@@ -60,7 +60,6 @@ function App() {
   ]
   
   const randomValueArr = getRandom(anecdotes.length)
-  console.log(randomValueArr)
 
   const [selected, setSelected] = useState(0)
 
