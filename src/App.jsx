@@ -73,6 +73,9 @@ function App() {
     votesCopy[selected] += 1
     setVotes(votesCopy)
   }
+  const max = Math.max(...votes)
+  const index = votes.indexOf(max)
+  
 
   return (
     <div className="App">
@@ -91,6 +94,12 @@ function App() {
       </div>
       <div>
         <Button handleClick={() => upVote() } text="vote" />
+      </div>
+      <div>
+        <h1> Anecdote most voted </h1>
+        { anecdotes[index]}
+        <br></br>
+        has {max} votes
       </div>
     </div>
     
