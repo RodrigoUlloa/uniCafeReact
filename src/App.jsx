@@ -58,10 +58,14 @@ function App() {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
-  
   const randomValueArr = getRandom(anecdotes.length)
-
   const [selected, setSelected] = useState(0)
+  const points = [0,0,0,0,0,0,0,0]
+  const copy = [...points]
+
+  function vote(array, index){
+    array[index] += 1
+  }
 
   return (
     <div className="App">
@@ -78,8 +82,16 @@ function App() {
         
         <Button handleClick={() => setSelected(randomValueArr)} text="next anecdote" />
       </div>
+      <div>
+        <Button handleClick={() => vote(copy, randomValueArr) } text="vote" />
+        
+        {console.log(randomValueArr)}
+        {console.log(copy)}
+        
+      </div>
     </div>
-  )
+    
+  ) 
 }
 
 export default App
