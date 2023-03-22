@@ -7,6 +7,16 @@ const Button = (props) => (
   </button>
 )
 
+// const handleClick = (text) => {
+//   if (text.localeCompare('show') === 0) { 
+//     setSelected(Math.floor(Math.random() * anecdotes.length))
+//   } else {
+//     votes[selected] += 1
+//     console.log(votes)
+//   }
+// }
+//<Button handleClick={() => handleClick('vote')} text='Vote this anecdote' />
+
 function StatisticsTable  (props)  {
   return props.all ? (
     <div>
@@ -37,10 +47,6 @@ function StatisticLine ({text, value}) {
   )
 }
 
-function getRandom(max) {
-  return Math.floor(Math.random() * max);
-}
-
 function App() {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
@@ -58,13 +64,14 @@ function App() {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
-  const randomValueArr = getRandom(anecdotes.length)
+   
   const [selected, setSelected] = useState(0)
-  const points = [0,0,0,0,0,0,0,0]
-  const copy = [...points]
-
-  function vote(array, index){
-    array[index] += 1
+  const randomValueArr = () => setSelected(Math.floor(Math.random()* anecdotes.length))
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0))
+  const upVote = () => {
+    const votesCopy = [...votes]
+    votesCopy[selected] += 1
+    setVotes(votesCopy)
   }
 
   return (
@@ -75,7 +82,7 @@ function App() {
       <Button handleClick={() => setBad(bad + 1)} text="bad" />
       
       <StatisticsTable good={good} neutral={neutral} bad={bad} all={all} average={average} />
-
+ 
       <div>
         {anecdotes[selected]}
         <br></br>
@@ -83,11 +90,7 @@ function App() {
         <Button handleClick={() => setSelected(randomValueArr)} text="next anecdote" />
       </div>
       <div>
-        <Button handleClick={() => vote(copy, randomValueArr) } text="vote" />
-        
-        {console.log(randomValueArr)}
-        {console.log(copy)}
-        
+        <Button handleClick={() => upVote() } text="vote" />
       </div>
     </div>
     
